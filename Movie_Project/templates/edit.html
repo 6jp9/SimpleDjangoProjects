@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body %}
+<div style="text-align: center;color: wheat;">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit">
+    <a href="/"><input type="button"  value="cancel"></a>
+
+  </form>
+</div>
+{% endblock %}
