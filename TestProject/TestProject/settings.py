@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATES_DIR = BASE_DIR/'templates'
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'TestProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,7 +70,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'TestProject.wsgi.application'
-
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/logout'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

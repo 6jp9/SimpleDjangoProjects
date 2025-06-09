@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html' %}
+{% block body_block %}
+<div class="jumbotron">
+    <div class="container">
+        <h1>Hi,{{ request.user.username }}</h1>
+        <h1>Welcome To The Test:</h1>
+        <p>Description..........</p>
+        <h3>Test-Rules</h3>
+        <ul style="list-style: none;">
+            <li>rule-1</li>
+            <li>rule-2</li>
+            <li>rule-3</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+
