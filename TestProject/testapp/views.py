@@ -31,5 +31,11 @@ def signup(request):
             return HttpResponseRedirect('/accounts/login')
     else:
         form = SignUpForm()
-
     return render(request, 'testapp/signup.html', {'form': form})
+
+from testapp.models import Question
+
+def exam(request):
+    question = Question.objects.all()
+    return render(request,'testapp/exam.html',{'question':question})
+
