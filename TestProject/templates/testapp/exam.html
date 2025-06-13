@@ -2,8 +2,9 @@
 {% extends 'testapp/base.html' %}
 {% block body_block %}
 <div class="jumbotron">
-    <h1>Test:</h1><br>
-    
+    <h1>Test on:{{type}}</h1>
+    <h3>Difficulty:{{level}}</h3>
+    <br>
      <form method="POST">
   {% csrf_token %}
   {% for q in question %}

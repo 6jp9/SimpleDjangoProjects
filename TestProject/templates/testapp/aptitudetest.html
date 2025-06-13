@@ -3,11 +3,33 @@
 {% block body_block %}
 <div class="jumbotron">
     <div class="container">
-        <h1>Aptitude Test:</h1>
-        <p>Description......</p>
-        <button class="btn btn-success">Start Test</button>
+        <h1>Front End Test:</h1>
+        <p>
+    <h3>Welcome to the Front-End Technologies Exam!</h3>
+    <h5>This test is designed to assess your knowledge of essential front-end development concepts, including HTML, CSS, JavaScript, responsive design, frameworks like React, and web performance optimization.</h5>
+    <h6>📋 Exam Format:</h6>
+    <ul>
+        <li>Total Questions: 20 Multiple Choice Questions (MCQs)</li>
+        <li>Difficulty Levels: Beginner / Intermediate / Expert</li>
+        <li>Marking: Each correct answer awards 1 mark. No negative marking.</li>
+    </ul>
+    <h6>✅ Instructions:</h6>
+    <ul>
+        <li>Select your preferred difficulty level before starting the exam.</li>
+        <li>Once the test begins, you cannot change your level.</li>
+        <li>Do not refresh or close the browser window during the exam.</li>
+        <li>At the end of the test, your score and detailed feedback will be displayed.</li>
+    </ul>
+</p>
+
+        <form action="" method="GET">
+            <select name="level" class='btn btn-light dropdown-toggle' id="test_level">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="expert">Expert</option>
+            </select>
+            <button class="btn btn-success">Start Test</button>
+        </form>
     </div>
 </div>
 {% endblock %}
-
-

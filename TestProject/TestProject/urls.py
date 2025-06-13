@@ -23,14 +23,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
     path('javatest/', views.javatest),
-    path('pythontest/', views.pyhtontest),
+    path('pythontest/', views.pythontest),
     path('aptitudetest/', views.aptitudetest),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', views.logout_view),
     path('signup/',views.signup),
-    path('exam_py_beginner/',views.exam),
-
-    
+    path('py_exam/',views.py_exam),
+    path('java_exam/',views.java_exam),
+    path('apt_exam/',views.aptitude_exam),
 
 ]
 
