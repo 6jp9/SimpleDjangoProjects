@@ -30,6 +30,7 @@ def logout_view(request):
     return render(request,'registration/custom_logout.html')
 
 
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
