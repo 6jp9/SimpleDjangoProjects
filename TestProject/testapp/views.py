@@ -45,17 +45,94 @@ def signup(request):
 
 from testapp.models import Py_Question
 
+
+
+
 def py_exam(request):
     level = request.GET.get('level')
     py_question = Py_Question.objects.filter(level=level,type='python')
+
+    if request.method == 'POST':
+        score = 0
+        total = py_question.count()
+        result = []
+
+        for q in py_question:
+            valid = False
+            user_answer = request.POST.get(f'question_{q.id}')
+            user_answer_text='Not Attempted'
+
+            if user_answer == q.correct_answer:
+                score+=1
+                valid = True
+            if user_answer!=None:
+                user_answer_text = str(user_answer)+'. '+str(getattr(q,'option_'+user_answer.lower()))
+
+            result.append({'question':q.question_text,
+                           'user_answer':user_answer_text,
+                           'right_answer':str(q.correct_answer)+'. '+str(getattr(q,'option_'+str(q.correct_answer).lower())),
+                           'valid':valid,
+                           })
+        return render(request,'testapp/result.html',{'result':result,'score':score,'total':total,'type':'Python','level':level})
+
     return render(request,'testapp/exam.html',{'question':py_question,'type':'Python','level':level})
+
+
+
+
 def java_exam(request):
     level = request.GET.get('level')
     py_question = Py_Question.objects.filter(level=level,type='java')
+    if request.method == 'POST':
+        score = 0
+        total = py_question.count()
+        result = []
+
+        for q in py_question:
+            valid = False
+            user_answer = request.POST.get(f'question_{q.id}')
+            user_answer_text='Not Attempted'
+
+            if user_answer == q.correct_answer:
+                score+=1
+                valid = True
+            if user_answer!=None:
+                user_answer_text = str(user_answer)+'. '+str(getattr(q,'option_'+user_answer.lower()))
+
+            result.append({'question':q.question_text,
+                           'user_answer':user_answer_text,
+                           'right_answer':str(q.correct_answer)+'. '+str(getattr(q,'option_'+str(q.correct_answer).lower())),
+                           'valid':valid,
+                           })
+        return render(request,'testapp/result.html',{'result':result,'score':score,'total':total,'type':'Java','level':level})
+
     return render(request,'testapp/exam.html',{'question':py_question,'type':'Java','level':level})
 def aptitude_exam(request):
     level = request.GET.get('level')
     py_question = Py_Question.objects.filter(level=level,type='frontend')
+    if request.method == 'POST':
+        score = 0
+        total = py_question.count()
+        result = []
+
+        for q in py_question:
+            valid = False
+            user_answer = request.POST.get(f'question_{q.id}')
+            user_answer_text='Not Attempted'
+            
+            if user_answer == q.correct_answer:
+                score+=1
+                valid = True
+            if user_answer!=None:
+                user_answer_text = str(user_answer)+'. '+str(getattr(q,'option_'+user_answer.lower()))
+
+            result.append({'question':q.question_text,
+                           'user_answer':user_answer_text,
+                           'right_answer':str(q.correct_answer)+'. '+str(getattr(q,'option_'+str(q.correct_answer).lower())),
+                           'valid':valid,
+                           })
+        return render(request,'testapp/result.html',{'result':result,'score':score,'total':total,'type':'Front-End','level':level})
+
     return render(request,'testapp/exam.html',{'question':py_question,'type':'Front-End Tech','level':level})
     
 

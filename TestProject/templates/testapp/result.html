@@ -4,8 +4,33 @@
 <div class="jumbotron">
     <div class="container">
         <h1>Test Results:</h1>
-        
-        
+
+        <div class="container mt-4">
+            <h1>Results - {{ type }} Exam ({{ level }})</h1>
+            <h3>Your Score: {{ score }} / {{ total }}</h3>
+
+            <hr>
+            {% for r in result %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Q{{ forloop.counter }}: {{ r.question }}</h5>
+                    <p class="card-text">
+                        <strong>Your Answer:</strong> {{ r.user_answer|default:"Not Attempted" }} <br>
+                        <strong>Correct Answer:</strong> {{ r.right_answer }} <br>
+                        {% if r.valid %}
+                        <span class="text-success">✅ Correct</span>
+                        {% else %}
+                        <span class="text-danger">❌ Incorrect</span>
+                        {% endif %}
+                    </p>
+
+                </div>
+            </div>
+            {% endfor %}
+            <a href="/" class="btn btn-success">Home</a>
+            <a href="https://www.w3schools.com/" class="btn btn-success">Learn</a>
+        </div>
     </div>
 </div>
 {% endblock %}
