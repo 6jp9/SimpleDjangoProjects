@@ -32,4 +32,4 @@ A full-featured, login-protected multiple-choice quiz application built with Dja
 
 ```bash
 git clone https://github.com/6jp9/SimpleDjangoProjects.git
-cd quiz-app
+
