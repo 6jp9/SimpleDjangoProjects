@@ -31,5 +31,5 @@ A full-featured, login-protected multiple-choice quiz application built with Dja
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/quiz-app.git
+git clone https://github.com/6jp9/SimpleDjangoProjects.git
 cd quiz-app
