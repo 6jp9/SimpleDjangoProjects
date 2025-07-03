@@ -29,19 +29,72 @@ def aptitudetest(request):
 def logout_view(request):
     return render(request,'registration/custom_logout.html')
 
+#####################################################################
 
+from django.contrib.auth.models import User
+
+def verify_otp(request):
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp')
+        real_otp = request.session.get('otp')
+        data = request.session.get('signup_data')
+
+        if entered_otp == real_otp:
+            # Create and save the user
+            user = User(
+                username=data['username'],
+                email=data['email']
+            )
+            user.set_password(data['password'])  # Assuming you use password1 in your form
+            user.save()
+            # Clear session data
+            del request.session['signup_data']
+            del request.session['otp']
+
+            return redirect('/accounts/login')
+        else:
+            return render(request, 'testapp/otpverify.html', {'error': 'Invalid OTP'})
+    return render(request, 'testapp/otpverify.html')
+
+
+from django.core.mail import send_mail
+from random import randint
 
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False) 
-            user.set_password(user.password) 
-            user.save()
-            return HttpResponseRedirect('/accounts/login')
+            # Store user data in session temporarily
+            request.session['signup_data'] = form.cleaned_data
+            otp = str(randint(100000, 999999))
+            request.session['otp'] = otp
+
+            # Send OTP to email
+            send_mail(
+                subject='Quiz App Email Verification',
+                message = f"Hello {form.cleaned_data['username']},\nYour OTP for verification is {otp}.",
+                from_email='quizapp6969@gmail.com',
+                recipient_list=[form.cleaned_data['email']],
+                fail_silently=False,
+            )
+            return redirect('verify_otp')
     else:
         form = SignUpForm()
     return render(request, 'testapp/signup.html', {'form': form})
+
+#####################################################################
+
+# def signup(request):
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False) 
+#             user.set_password(user.password) 
+#             user.save()
+#             return HttpResponseRedirect('/accounts/login')
+#     else:
+#         form = SignUpForm()
+#     return render(request, 'testapp/signup.html', {'form': form})
 
 from testapp.models import Py_Question
 
@@ -135,4 +188,5 @@ def aptitude_exam(request):
 
     return render(request,'testapp/exam.html',{'question':py_question,'type':'Front-End Tech','level':level})
     
+
 

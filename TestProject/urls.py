@@ -31,6 +31,7 @@ urlpatterns = [
     path('py_exam/',views.py_exam),
     path('java_exam/',views.java_exam),
     path('apt_exam/',views.aptitude_exam),
+    path('verify_otp/', views.verify_otp, name='verify_otp'),
 
 ]
 
