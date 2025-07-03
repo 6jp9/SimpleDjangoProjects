@@ -73,7 +73,7 @@ def signup(request):
             send_mail(
                 subject='Quiz App Email Verification',
                 message = f"Hello {form.cleaned_data['username']},\nYour OTP for verification is {otp}.",
-                from_email='quizapp6969@gmail.com',
+                from_email='<your_email>.com',
                 recipient_list=[form.cleaned_data['email']],
                 fail_silently=False,
             )
